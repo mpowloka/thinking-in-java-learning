@@ -1,3 +1,5 @@
+package InternalClasses;
+
 /**
  * Created by michal.powloka on 18.07.2017.
  */
