@@ -12,14 +12,16 @@ class Parcel {
         ID = ++counter;
         ParcelDestination pd = this.new ParcelDestination(destination, origin);
         ParcelContent pc = this.new ParcelContent(content);
-        System.out.println("Sending parcel no. " + ID + " from " + origin + " to " + destination + ". " +content + " items inside.");
+        System.out.println("Sending parcel no. " + ID + " from " + origin + " to " + destination + ". " + content + " items inside.");
     }
 
     public ParcelDestination getParcelDestination () {
+        //test phrase
         return new ParcelDestination("your heart, honey ", "your stomach");
     }
 
     public ParcelContent getParcelContent () {
+        //test number
         return new ParcelContent(42);
     }
 
@@ -62,7 +64,7 @@ public class ParcelSender {
         // ParcelDestination pd = p2.getParcelDestination();
         System.out.println(d.getLabel());
 
-        // valid because protected components are avaible within package
+        // Valid, because protected components are avaible within package
         Parcel.ParcelContent pc = p2.getParcelContent();
         System.out.println(pc.getContent());
     }
