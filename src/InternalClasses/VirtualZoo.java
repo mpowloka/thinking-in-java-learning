@@ -8,11 +8,15 @@ interface Animal {
 }
 
 public class VirtualZoo {
+    public ZooDatabase f () {
+        return  new ZooDatabase();
+    }
 
-    public VirtualZoo() { }
+    public VirtualZoo() { ZooDatabase.ZooCounter++; }
+
     //made only to see a way of making
     //anonymous classes using superclass non-standard constructor
-    public VirtualZoo(int x) { }
+    public VirtualZoo(int x) { this(); }
 
 
 
@@ -59,6 +63,8 @@ public class VirtualZoo {
 
                 @Override
                 public void makeNoise() {
+                    //This is correct, it shows the way of addressing parent object
+                    //VirtualZoo.this.lionShow(3);
                     System.out.println("*I don't really know what kind of noise penguins make... Sorry!*");
                 }
 
@@ -77,7 +83,7 @@ public class VirtualZoo {
             else {
                 System.out.println("No penguin has appeared, try luck next time!");
                 return false;
-                // illegal expression below, class Penguin avaible only within brackets it has been declared (if statement)
+                // illegal expression below, class Penguin available only within brackets it has been declared (if statement)
                 // Penguin p = new Penguin();
             }
     }
@@ -106,6 +112,17 @@ public class VirtualZoo {
         }
     }
 
+    private static class ZooDatabase {
+        // static inner class and own static fields/methods
+        // while typical inner class cannot
+        private static int ZooCounter;
+
+        public ZooDatabase() {
+            // incorrect, 'static class' might not reference parent object (bcs it has none)
+            // VirtualZoo.this.lionShow(3);
+        }
+    }
+
     public static void main(String[] args) {
         VirtualZoo vz = new VirtualZoo();
 
@@ -113,10 +130,12 @@ public class VirtualZoo {
         while(!vz.penguinShow());
 
         VirtualZoo mvz1 = vz.getMobileVirtualZoo(1, "Michal");
-        // cannot get access to methods added in anonymous declaration
+        // cannot use methods from anonymous class, which have not been declared
+        // in superclass / implemented interface
         // mvz1.playMusic();
         VirtualZoo mvz2 = vz.getMobileVirtualZoo(2, "Michal");
-        // cannot get access to methods added in anonymous declaration
         // mvz2.showUserGuide();
+
+        ZooDatabase a = new ZooDatabase();
     }
 }
